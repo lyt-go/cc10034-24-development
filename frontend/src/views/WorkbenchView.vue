@@ -12,6 +12,14 @@
         <button class="btn" data-testid="export" type="button" @click="exportRows">
           导出{{ meta.name }}清单
         </button>
+        <RouterLink
+          v-if="meta.key === 'classify_tag'"
+          class="btn primary"
+          to="/field_grading"
+          data-testid="open-field-grading"
+        >
+          字段分级编辑器
+        </RouterLink>
       </div>
     </header>
 
@@ -60,6 +68,22 @@
             >
               {{ action }}
             </button>
+            <RouterLink
+              v-if="meta.key === 'classify_tag'"
+              class="link"
+              :to="`/field_grading?resource=${row.id}`"
+              :data-testid="`field-grading-${row.id}`"
+            >
+              逐字段分级
+            </RouterLink>
+            <RouterLink
+              v-if="meta.key === 'mask_rule'"
+              class="link"
+              :to="`/mask_rule/${row.id}`"
+              :data-testid="`detail-${row.id}`"
+            >
+              字段分级详情
+            </RouterLink>
           </td>
         </tr>
         <tr v-if="!rows.length">
